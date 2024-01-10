@@ -1,0 +1,5 @@
+0: Diesel
+1: Electric
+2: Hybrid
+3: Other
+4: Petrol
