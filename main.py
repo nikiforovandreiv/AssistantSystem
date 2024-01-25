@@ -977,7 +977,7 @@ class UICarPricePredictionDialog(QMainWindow):
         self.currentVariableLabel.setText(
             QCoreApplication.translate("carPricePredictionDialog", u"Current variable:", None))
         self.currentVariableResultLabel.setText(
-            QCoreApplication.translate("carPricePredictionDialog", u"year", None))
+            QCoreApplication.translate("carPricePredictionDialog", u"Year", None))
 
         # Set text for predict price button
         self.predictPriceButton.setText(QCoreApplication.translate("carPricePredictionDialog", u"Predict price", None))
