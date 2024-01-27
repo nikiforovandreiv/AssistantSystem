@@ -659,7 +659,7 @@ class UICarPricePredictionDialog(QMainWindow):
         # Select 100 random rows from your DataFrame
         self.random_sample_df = self.df.sample(n=100, random_state=42)
 
-        # Create a scatter plot for mileage vs. price
+        # Create a scatter plot for year vs. price
         self.scatter_fig, ax = plt.subplots()
         self.scatter_plot = sns.scatterplot(data=self.random_sample_df, y="price", x="year", ax=ax)
         self.scatter_plot.set_title("Scatter Plot: Price vs. Year")

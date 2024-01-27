@@ -202,16 +202,209 @@ for that.
 3) A README.md file is created with the structure described in part 01.
 4) The module venv has been used.
 5) A free data source has been used.
-6) There is a data import (predefined format and content of CSV).
+6) There is a data import (predefined format and content of CSV):
+    ```
+    # Lines 238 - 252 in main.py
+    # Create a menu bar
+    menubar = self.menuBar()
+    
+    # Create a File menu
+    file_menu = menubar.addMenu("File")
+    
+    # Create "Import CSV File" action
+    import_csv_file_action = QAction("Import CSV File", self)
+    # Set icon for the action
+    import_csv_file_img_path = os.path.join(os.path.dirname(__file__), 'img/import_csv_file_action_img.png')
+    import_csv_file_action.setIcon(QIcon(import_csv_file_img_path))
+    # Connect Import CSV File action signal to a custom slot
+    import_csv_file_action.triggered.connect(self.import_csv_file)
+    # Add open action to file_menu
+    file_menu.addAction(import_csv_file_action)
+    ```
 7) The data is read from a file after clicking on a (menu) button and directly after starting the app.
+    ```    
+    # Lines 1210 - 1228 in main.py
+    def import_csv_file(self):
+    file_path, _ = QFileDialog.getOpenFileName(self, "Select CSV file", "", "CSV File (*.csv)")
+    
+    if file_path:
+        # Read the CSV file into a DataFrame using pandas
+        self.df = pd.read_csv(file_path)
+        print("File chosen and loaded into variable.")
+    
+        # Load the saved random forest model
+        self.update_plot()
+        # Analyze the input DataFrame
+        self.df_analyze = DFAnalyze(self.df).analyze()
+        self.df = DFPreprocess(self.df).preprocess()
+        self.df = self.df.dropna()
+        df_train = DFTrain(self.df)
+        self.random_forest_model = df_train.train_random_forest_regressor()
+        df_train.save_trained_model()
+    else:
+        print("No file chosen.")
+    ```
 8) The data is analyzed with Pandas methods, so that a user gets on overview.
+    ```
+    # Lines 112 - 113 in main.py
+    # df_analyze.py is responsible for it
+    # Analyze the input DataFrame
+    self.df_analyze = DFAnalyze(df).analyze()
+    ```
 9) The functions dataframe.info(), dataframe.describe() and/or dataframe.corr() have been used.
+    ```
+    # Lines 27 - 29 in df_analyze.py
+    # Print basic information about the DataFrame
+    print(f"\n{self.text_format.BOLD}DataFrame Info:{self.text_format.RESET}\n")
+    print(self.df.info())
+    
+    # Lines 41 - 43 in df_analyze.py
+    # Print summary statistics
+    print(f"\n{self.text_format.BOLD}Summary Statistics:{self.text_format.RESET}\n")
+    print(self.df.describe())
+    ```
 10) Other metrics and diagrams to do this have been used.
+    ```
+    # Lines 112 - 113 in main.py
+    # df_analyze.py is responsible for it
+    # Analyze the input DataFrame
+    self.df_analyze = DFAnalyze(df).analyze()
+    ```
 11) Several input widgets (at least 3, where 2 must be different) that change some feature variables have been created.
+    ```
+    # In total there are 8 input widgets
+    # They are created in main.py -> setup_ui()
+    ```
 12) A Scikit training model algorithm (e.g. from Aurélien Géron, Chapter 4) has been applied.
+    ```
+    # df_train.py is responsible for it
+    # Random Forest has been used
+    ```
 13) 1 output canvas for data visualization has been created.
+    ```
+    # Lines 651 - 682 in main.py
+    # Create car price graphics view
+    self.carPriceGraphicsView = QWidget(self)
+    self.carPriceGraphicsView.setObjectName(u"carPriceGraphicsView")
+    self.carPriceGraphicsView.setObjectName(u"carPriceGraphicsView")
+    self.carPriceGraphicsView.setGeometry(QRect(200, 60, 571, 361))
+
+    self.scatterMainLayout = QVBoxLayout(self.carPriceGraphicsView)
+
+    # Select 100 random rows from your DataFrame
+    self.random_sample_df = self.df.sample(n=100, random_state=42)
+
+    # Create a scatter plot for year vs. price
+    self.scatter_fig, ax = plt.subplots()
+    self.scatter_plot = sns.scatterplot(data=self.random_sample_df, y="price", x="year", ax=ax)
+    self.scatter_plot.set_title("Scatter Plot: Price vs. Year")
+
+    # Customize xlabel and ylabel appearance
+    self.scatter_plot.set_xlabel("Year", fontsize=12, labelpad=5)
+    self.scatter_plot.set_ylabel("Price", fontsize=12, labelpad=5)
+
+    self.scatter_canvas = FigureCanvasQTAgg(self.scatter_fig)
+
+    self.scatter_layout = QVBoxLayout()
+    self.scatter_layout.addWidget(self.scatter_canvas)
+
+    self.scatter_fig.tight_layout(pad=2)
+
+    # Add a toolbar to the scatter canvas
+    self.toolbar = NavigationToolbar2QT(self.scatter_canvas, self)
+    self.scatterMainLayout.addWidget(self.toolbar)
+
+    self.scatterMainLayout.addLayout(self.scatter_layout)
+    ```
 14) 3 statistical metrics over the input data are shown
+    ```
+    # Lines 687 - 766 in main.py
+    # Create metrics main layout
+    self.metricsMainLayout = QWidget(self)
+    self.metricsMainLayout.setObjectName(u"verticalLayoutWidget_2")
+    self.metricsMainLayout.setGeometry(QRect(489, 429, 281, 45))
+
+    # Create metrics vertical layout
+    self.metricsVerticalLayout = QVBoxLayout(self.metricsMainLayout)
+    self.metricsVerticalLayout.setSpacing(0)
+    self.metricsVerticalLayout.setObjectName(u"metricsVerticalLayout")
+    self.metricsVerticalLayout.setContentsMargins(0, 0, 0, 0)
+
+    # Create metrics horizontal layout
+    self.metricsHorizontalLayout = QHBoxLayout()
+    self.metricsHorizontalLayout.setSpacing(0)
+    self.metricsHorizontalLayout.setObjectName(u"metricsHorizontalLayout")
+
+    # Create top model label
+    self.topModelLabel = QLabel(self.metricsMainLayout)
+    self.topModelLabel.setObjectName(u"topModelLabel")
+    self.topModelLabel.setFont(default_label_font)
+    self.topModelLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+    # Add top model label to metrics horizontal layout
+    self.metricsHorizontalLayout.addWidget(self.topModelLabel)
+
+    # Create avg mileage label
+    self.avgMileageLabel = QLabel(self.metricsMainLayout)
+    self.avgMileageLabel.setObjectName(u"avgMileageLabel")
+    self.avgMileageLabel.setFont(default_label_font)
+    self.avgMileageLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+    # Add avg mileage label to metrics horizontal layout
+    self.metricsHorizontalLayout.addWidget(self.avgMileageLabel)
+
+    # Create avg mpg label
+    self.avgMPGLabel = QLabel(self.metricsMainLayout)
+    self.avgMPGLabel.setObjectName(u"avgMPGLabel")
+    self.avgMPGLabel.setFont(default_label_font)
+    self.avgMPGLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+    # Add avg mpg label to metrics horizontal layout
+    self.metricsHorizontalLayout.addWidget(self.avgMPGLabel)
+
+    # Add metrics horizontal layout to metrics vertical layout
+    self.metricsVerticalLayout.addLayout(self.metricsHorizontalLayout)
+
+    # Create metrics horizontal layout 2
+    self.metricsHorizontalLayout_2 = QHBoxLayout()
+    self.metricsHorizontalLayout_2.setSpacing(0)
+    self.metricsHorizontalLayout_2.setObjectName(u"metricsHorizontalLayout_2")
+
+    # Create top model result label
+    self.topModelResultLabel = QLabel(self.metricsMainLayout)
+    self.topModelResultLabel.setObjectName(u"topModelResultLabel")
+    self.topModelResultLabel.setFont(default_label_font)
+    self.topModelResultLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+    # Add top model result label to metrics horizontal layout 2
+    self.metricsHorizontalLayout_2.addWidget(self.topModelResultLabel)
+
+    # Create avg mileage result label
+    self.avgMileageResultLabel = QLabel(self.metricsMainLayout)
+    self.avgMileageResultLabel.setObjectName(u"avgMileageResultLabel")
+    self.avgMileageResultLabel.setFont(default_label_font)
+    self.avgMileageResultLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+    # Add avg mileage result label to metrics horizontal layout 2
+    self.metricsHorizontalLayout_2.addWidget(self.avgMileageResultLabel)
+
+    # Create avg mpg result label
+    self.avgMPGResultLabel = QLabel(self.metricsMainLayout)
+    self.avgMPGResultLabel.setObjectName(u"avgMPGResultLabel")
+    self.avgMPGResultLabel.setFont(default_label_font)
+    self.avgMPGResultLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+    # Add top model result label to metrics horizontal layout 2
+    self.metricsHorizontalLayout_2.addWidget(self.avgMPGResultLabel)
+
+    # Add metrics horizontal layout 2 to metrics vertical layout
+    self.metricsVerticalLayout.addLayout(self.metricsHorizontalLayout_2)
+    ```
 15) The app reacts interactively to the change of input parameter with a new prediction with visualization.
+    ```
+    # The app reacts interactively to the change of input parameter 
+    # with a new prediction with visualization when 'Pridect Price' button is pressed.
+    ```
 
 ## Work Done
 
