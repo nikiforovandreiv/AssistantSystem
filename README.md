@@ -14,7 +14,10 @@
 
 Welcome to our PyQt6 Car Price Prediction App!
 
-Have you ever wondered about the fair market value of a used car? Our Car Price Prediction App is here to assist you in estimating the price of a vehicle based on various input features. This user-friendly application utilizes PyQt6 for its sleek graphical interface, allowing you to effortlessly input information and obtain a predicted price.
+Have you ever wondered about the fair market value of a used car? 
+Our Car Price Prediction App is here to assist you in estimating the price of a vehicle based on various input features. 
+This user-friendly application utilizes PyQt6 for its sleek graphical interface, 
+allowing you to effortlessly input information and obtain a predicted price.
 
 ### Key Features:
 
@@ -62,7 +65,8 @@ Have you ever wondered about the fair market value of a used car? Our Car Price 
   - Learn more about the factors affecting car prices as you interact with the app. 
   - Gain valuable knowledge about the relationships between different variables and their impact on the final estimation.
 
-Whether you're a car enthusiast, a prospective buyer, or simply curious about the fascinating world of predictive modeling, our Car Price Prediction App is a valuable tool for anyone seeking accurate and data-driven insights into used car pricing. 
+Whether you're a car enthusiast, a prospective buyer, or simply curious about the fascinating world of predictive modeling, 
+our Car Price Prediction App is a valuable tool for anyone seeking accurate and data-driven insights into used car pricing. 
 Download and explore the future of car valuation today!
 
 ## Prerequisites
@@ -70,54 +74,86 @@ Download and explore the future of car valuation today!
 **Project Prerequisites:**
 [https://mygit.th-deg.de/an17653/sas-project-2/-/blob/main/requirements.txt](https://mygit.th-deg.de/an17653/sas-project-2/-/blob/main/requirements.txt)
 
+### 
+
 ### joblib~=1.3.2:
 - **Description:** 
-  - Joblib is a set of tools to provide lightweight pipelining in Python. It provides utilities for parallel computing, particularly in the context of data science and machine learning.
+  - Joblib is a set of tools to provide lightweight pipelining in Python. 
+  - It provides utilities for parallel computing, particularly in the context of data science and machine learning.
 - **Version Specification:**
   - This project requires Joblib version 1.3.2.
 
 ### pandas~=2.1.4:
 - **Description:** 
-  - Pandas is a powerful and easy-to-use data manipulation and analysis library for Python. It provides data structures like DataFrame for efficient data manipulation.
+  - Pandas is a powerful and easy-to-use data manipulation and analysis library for Python. 
+  - It provides data structures like DataFrame for efficient data manipulation.
 - **Version Specification:** 
   - This project requires Pandas version 2.1.4.
 
 ### seaborn~=0.13.1:
 - **Description:** 
-  - Seaborn is a statistical data visualization library based on Matplotlib. It provides a high-level interface for drawing attractive and informative statistical graphics.
+  - Seaborn is a statistical data visualization library based on Matplotlib. 
+  - It provides a high-level interface for drawing attractive and informative statistical graphics.
 - **Version Specification:** 
   - This project requires Seaborn version 0.13.1.
 
 ### PyQt6~=6.6.1:
 - **Description:** 
-  - PyQt is a set of Python bindings for Qt libraries. PyQt6 is the latest version, providing a set of Python modules to enable the use of Qt6 in Python applications.
+  - PyQt is a set of Python bindings for Qt libraries. 
+  - PyQt6 is the latest version, providing a set of Python modules to enable the use of Qt6 in Python applications.
 - **Version Specification:** 
   - This project requires PyQt6 version 6.6.1.
 
 ### matplotlib~=3.8.2:
 - **Description:** 
-  - Matplotlib is a 2D plotting library for Python. It produces publication-quality figures in a variety of formats and interactive environments across platforms.
+  - Matplotlib is a 2D plotting library for Python. 
+  - It produces publication-quality figures in a variety of formats and interactive environments across platforms.
 - **Version Specification:** 
   - This project requires Matplotlib version 3.8.2.
 
 ### scikit-learn~=1.3.2:
 - **Description:** 
-  - Scikit-learn is a machine learning library for Python. It provides simple and efficient tools for data mining and data analysis, built on NumPy, SciPy, and Matplotlib.
+  - Scikit-learn is a machine learning library for Python. 
+  - It provides simple and efficient tools for data mining and data analysis, built on NumPy, SciPy, and Matplotlib.
 - **Version Specification:** 
   - This project requires scikit-learn version 1.3.2.
 
 ## Installation
 
+### Prerequisites
+
+Before you begin, ensure you have the following prerequisites installed on your system:
+
+- Python >= 3.6 and <= 3.10
+- pip (Python package installer)
+- Virtualenv (optional but recommended)
+
 ### 1. Clone the Repository
-
 First, clone the project repository to your local machine using the following command:
-
 ```bash
 git clone https://mygit.th-deg.de/an17653/sas-project-2.git
+cd sas-project-2
 ```
 
-### 2. Install Required Modules
+### 2. Create a Virtual Environment (Optional)
+Creating a virtual environment is a good practice to isolate your project dependencies. 
+To create a virtual environment, run the following commands:
+```bash
+# Install virtualenv
+pip install virtualenv
 
+# Create a virtual environment
+virtualenv venv
+
+# Activate the virtual environment
+# On Windows
+venv\Scripts\activate
+
+# On Linux/macOS
+source venv/bin/activate
+```
+
+### 3. Install Required Modules
 Navigate to the project directory and install the necessary Python modules by running:
 ```bash
 pip install -r requirements.txt
@@ -125,8 +161,7 @@ pip install -r requirements.txt
 This command will install all the dependencies listed in the requirements.txt file, 
 ensuring that your environment is set up correctly for the application.
 
-### 3. Start the Application
-
+### 4. Start the Application
 After installing the required modules, start the application by running:
 ```bash
 python main.py
@@ -418,3 +453,6 @@ Mikita Zyhmantovich:
 
 Both:
 - General Python Programming
+
+We helped each other during the whole project with our respective parts, 
+discussed Implementation and implemented it together.
