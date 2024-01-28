@@ -8,7 +8,7 @@
 [https://mygit.th-deg.de/an17653/sas-project-2](https://mygit.th-deg.de/an17653/sas-project-2)
 
 **Project Wiki:**
-[https://mygit.th-deg.de/an17653/sas-project-2](https://mygit.th-deg.de/an17653/sas-project-2)
+[https://mygit.th-deg.de/an17653/sas-project-2/-/wikis/home](https://mygit.th-deg.de/an17653/sas-project-2/-/wikis/home)
 
 ## Project Description
 
